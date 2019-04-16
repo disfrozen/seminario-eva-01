@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald|Sigmar+One');
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400|Sigmar+One|Open+Sans');
 
 body{
   font-family: 'Oswald', serif;
@@ -6,9 +6,51 @@ body{
   background-color: black;
 }
 
+div .container-fluid{
+  background-color: black;
+}
+
+
 nav{
   font-family: 'Sigmar One', sans-serif;
   font-weight: 400;
+}
+
+.display-3{
+ font-family: 'Sigmar One', sans-serif;
+  color: #af330a;
+  font-size: 100px; font-weight: 700;
+}
+
+.lead{
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px; font-weight: 300;
+}
+
+.card-text{
+ font-family: 'Oswald', sans-serif;
+ font-weight: 300;
+}
+
+.navbar-dark {
+    background-color: transparent;
+}
+
+.rojo {
+    background-color:#af330a;
+    color:white;
+}
+
+.cardNA {
+  background-color: #ef7f5b;
+}
+
+.cardEU {
+  background-color: #7f75ef;
+}
+
+.cardSA {
+  background-color: #e5bf5e;
 }
 
 header {
@@ -49,6 +91,18 @@ header .overlay {
   background-color: black;
   opacity: 0.5;
   z-index: 1;
+}
+
+.bg-light {
+  background-color: black !important;
+}
+
+.bg-dark {
+  background-color: #af330a !important;
+}
+
+div .row{
+  background-color: black;
 }
 
 @media (pointer: coarse) and (hover: none) {
