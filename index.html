@@ -38,7 +38,7 @@
     <header>
         <div class="overlay"></div>
         <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="resource/concert.mp4" type="video/mp4">
+            <source src="resource/SOAD_concert.mp4" type="video/mp4">
         </video>
         <div class="container h-100">
             <div class="d-flex h-100 text-center align-items-center">
@@ -78,8 +78,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
         // Lo primero es obtener un JSON y parsearlo en una variable de nombre data
-        $.getJSON("https://api.myjson.com/bins/7nqag", function(data) {
+        $.getJSON("https://api.myjson.com/bins/gcvfs", function(data) {
             // https://api.myjson.com/bins/1arov4
+            // https://api.myjson.com/bins/7nqag
             console.log(data);
             // Luego puedes colocar el mapa, seteando un centro y zoom
             var mymap = L.map('mapid').setView([20, -70], 3);
@@ -108,13 +109,13 @@
             for (var x = 0; x < data.length; x++) {
                 // con esto se agregan puntos en el plano por cada dato
               if(data[x].continente == "NA"){
-                L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: blueIcon}).addTo(mymap).bindPopup(data[x].nombre).closePopup();
+                L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: blueIcon}).addTo(mymap).bindPopup(data[x].nombre + "<br />" + data[x].ciudad).closePopup();
               }
               else if (data[x].continente == "EU") {
-                L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: redIcon}).addTo(mymap).bindPopup(data[x].nombre).closePopup();
+                L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: redIcon}).addTo(mymap).bindPopup(data[x].nombre + "<br />" + data[x].ciudad).closePopup();
               }
               else {
-                  L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: yellowIcon}).addTo(mymap).bindPopup(data[x].nombre).closePopup();
+                  L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: yellowIcon}).addTo(mymap).bindPopup(data[x].nombre + "<br />" + data[x].ciudad).closePopup();
               }
                 // aprovechando el ciclo for, podemos crear otros elementos, fuera del mapa
                 // revisen el primer ejemplo en https://getbootstrap.com/docs/4.0/components/card/
@@ -131,14 +132,15 @@
                         else {
                           cuarto  =   "<div class=\"card-body cardSA\">"
                         }
-                            var quinto  =   "<h5 class=\"card-title\">" + data[x].nombre + "</h5>"
+                            var quinto  =   "<h5 class=\"card-title\">" + data[x].nombre + "</h5>";
+                            var quintoymedio = "<h6 class=\"card-subtitle\">" + data[x].ciudad + "</h6>";
                             var sexto   =   "<p class=\"card-text\">" + data[x].fecha + " de 2011</p>";
                             var septimo =   "<a href=\"" + data[x].wikipedia + "\" target=\"_blank\" class=\"btn btn-secondary btn-sm\">Wikipedia</a>";
                         var octavo  =   "</div>";
                     var noveno  =   "</div>";
                 var decimo  =   "</div>";
                 // esto se agrega tantas veces como puntos en el mapa, porque estamos dentro del mismo ciclo for
-                $("#conciertos").append(primero + segundo + tercero + cuarto + quinto + sexto + septimo + octavo + noveno + decimo);
+                $("#conciertos").append(primero + segundo + tercero + cuarto + quinto + quintoymedio + sexto + septimo + octavo + noveno + decimo);
             }
         });
         //Agrego lo siguiente para que al clic del menú la página suba y baje en 1 segundo, suavecito
