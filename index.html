@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#detalles">Conciertos</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#novedad">Estadios</a>
+                </li>
             </ul>
         </div>
       </div>
@@ -55,11 +58,32 @@
     </section>
 
     <section id="detalles" class="bg-light">
-        <div class="container">
-            <div class="row py-5" id="conciertos">
-                <!--aquí dentro va lo que mande el $("#conciertos").append()-->
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-12 py-3">
+                    Selecciona continente para ver sus locaciones:
+                    <select id="selector" onchange="mostrador()">
+                        <option>Continentes</option>
+                        <option>Norteamérica</option>
+                        <option>Europa</option>
+                        <option>Sudamérica</option>
+                    </select>
+                </div>
             </div>
         </div>
+    </section>
+
+    <section class="bg-light">
+        <div class="container">
+            <div class="row py-3" id="conciertos">
+                    <!--aquí hay un cambio-->
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="novedad">
+        <!--holi, aquí no hay nada aún-->
     </section>
 
     <footer>
@@ -119,7 +143,7 @@
               }
                 // aprovechando el ciclo for, podemos crear otros elementos, fuera del mapa
                 // revisen el primer ejemplo en https://getbootstrap.com/docs/4.0/components/card/
-                var primero =   "<div class=\"col-sm-4 col-lg-3 my-3\">";
+                var primero =   "<div class=\"col-sm-4 col-lg-3 my-3 " + data[x].continente + "\">";
                     var segundo =   "<div class=\"card\">";
                         var tercero =   "<img src=\"" + data[x].foto + "\" class=\"card-img-top\">";
                         var cuarto;
@@ -143,6 +167,26 @@
                 $("#conciertos").append(primero + segundo + tercero + cuarto + quinto + quintoymedio + sexto + septimo + octavo + noveno + decimo);
             }
         });
+
+        function mostrador() {
+
+            var x = document.getElementById("selector").value;
+
+            if (x.includes("Norteamérica")) {
+                $(".NA").show();
+                $(".EU, .SA").hide()
+            } else if (x.includes("Europa")) {
+                $(".EU").show()
+                $(".NA, .SA").hide()
+            } else if (x.includes("Sudamérica")) {
+                $(".SA").show();
+                $(".NA, .EU").hide()
+            } else {
+                $(".NA, .EU, .SA").show()
+            }
+
+        }
+
         //Agrego lo siguiente para que al clic del menú la página suba y baje en 1 segundo, suavecito
         $('a[href*="#"]:not([href="#"])').click(function() {
             if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -164,6 +208,34 @@
                }
         });
 
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script>
+        var estadios;
+
+        function preload(){
+            estadios = loadJSON("https://api.myjson.com/bins/14fv0g");
+          // https://api.myjson.com/bins/689tk
+          // https://api.myjson.com/bins/1a9wqo
+        }
+
+        function setup() {
+            createCanvas(windowWidth,600).parent("novedad");
+            background(20);
+            fill(255);
+            noStroke();
+            textAlign(CENTER);
+            rectMode(CENTER);
+            text('Capacidad de los estadios en los que se realizan los conciertos', width/2, 100);
+            estadios.capacidad.forEach(function(arena,i){
+                ellipse((width/13)*(1+i), height/2, arena.personas/1000, arena.personas/1000);
+                text(arena.estadio, (width/13)*(1+i), (height/2)+100, 75, 75);
+            });
+        }
+        function draw() {
+            // hay casos en lo que puedes dibujar en el setup
+        }
     </script>
 
 </body>

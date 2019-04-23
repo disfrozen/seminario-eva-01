@@ -100,6 +100,10 @@ div .row{
   background-color: black;
 }
 
+#detalles{
+  color: white;
+}
+
 @media (pointer: coarse) and (hover: none) {
   header {
     background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
@@ -107,4 +111,8 @@ div .row{
   header video {
     display: none;
   }
+}
+
+#novedad{
+  overflow: hidden;
 }
